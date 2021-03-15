@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<script type="text/javascript">
+		var slen = 70;	// 秒针长度
+		var mlen = 65;	// 分针
+		var hlen = 45;	// 时针
+		var ls = 0;
+		var lm = 0;
+		var lh = 0;
+		var flag = true;
+		function draw(){
+			if(flag){			// 防止多次点击画出奇怪的东西
+				flag = false;
+				var c = document.getElementById("myCanvas");
+				// Canvas.getContext(contextID) 方法返回一个用于在画布上绘图的环境。
+				// 参数 contextID 指定了您想要在画布上绘制的类型。
+				// 当前唯一的合法值是 "2d"，它指定了二维绘图，并且导致这个方法返回一个环境对象，该对象导出一个二维绘图 API。
+				var cxt = c.getContext("2d");	
+				
+				cxt.beginPath();
+				
+				// context.arc(x,y,r,sAngle,eAngle,counterclockwise);
+				// (x,y)是圆的中心坐标，r是半径，sAngle和nAngle是起始角(弧度，圆弧3点钟位置是0)和结束角，counterclockwise规定圆弧是顺时针还是逆时针绘制
+				
+				cxt.arc(200,150,4,0,2*Math.PI,true);	// 绘制表盘中心，true = 逆时针。
+				cxt.fill();	// 填充当前的图像（路径）。默认颜色是黑色。如果路径未关闭，那么 fill() 方法会从路径结束点到开始点之间添加一条线，以关闭该路径，然后填充该路径。
+				
+				cxt.closePath();
+				cxt.beginPath();
+				cxt.arc(200,150,100,0,2*Math.PI,true);	// 绘制表盘外围
+				
+				cxt.stroke();	// stroke() 方法会实际地绘制出通过 moveTo() 和 lineTo() 方法定义的路径。默认颜色是黑色。
+				cxt.closePath();
+				cxt.beginPath();
+				cxt.translate(200,150);	// 平移原点
+				cxt.rotate(-Math.PI/2);
+				cxt.save();
+				for(var i=0;i<60;i++){
+					if(i%5 == 0){
+						cxt.fillRect(80,0,20,5);	// 左上角坐标，长和宽
+					}else{
+						cxt.fillRect(90,0,10,2);
+					}
+					cxt.rotate(Math.PI/30);
+				}
+				cxt.closePath();
+				
+				
+				
+				// 解决打开网页时时针分针秒针延迟出现问题
+				// 在调用setInterval("Refresh();",1000)之前，先调用一个Refresh()函数画出指针
+				// 一段时间（接近但小于1秒钟）后消除刚才画的指针。（使用setTimeout计时）
+				Refresh();	
+				//setInterval(function{alert("Hello!")},1000);
+				setTimeout(function(){
+					cxt.clearRect(5,-1,slen+1,4);
+					cxt.clearRect(5,-1,mlen+1,5);
+					cxt.clearRect(5,-3,hlen+1,6);
+				},990);
+				setInterval("Refresh();",1000);		// 每1秒钟调用refresh方法刷新时针、分针、秒针位置
+			}
+			
+		}
+		
+		function Refresh(){
+			var c = document.getElementById("myCanvas");
+			var cxt = c.getContext("2d");
+			cxt.restore();
+			cxt.save();							// 保存当前环境的状态
+			cxt.rotate(ls*Math.PI/30);
+			// context.clearRect(x,y,width,height)：在给定矩形内清空一个矩形，参数是:左上角坐标(x,y)，要清除的像素宽和高
+			cxt.clearRect(5,-1,slen+3,4);		// 清除上次秒针显示内容
+			cxt.restore();						// 返回之前保存过的路径状态和属性
+			cxt.save();
+			
+			cxt.rotate(lm*Math.PI/30);
+			cxt.clearRect(5,-1,mlen+3,5);		// 清除分针
+			cxt.restore();
+			cxt.save();
+			
+			cxt.rotate(lh*Math.PI/6);
+			cxt.clearRect(5,-3,hlen+3,6);		//清除时针
+			
+			cxt.clearRect()
+			var time = new Date();
+			// 获取当前时间
+			var s = ls = time.getSeconds();
+			var m = lm = time.getMinutes();
+			var h = lh = time.getHours();	
+			cxt.restore();
+			cxt.save();
+			
+			cxt.rotate(s*Math.PI/30);		// 设置秒针位置
+			cxt.fillRect(5,0,slen,2);		// 重新绘制秒针
+			cxt.restore();
+			cxt.save();
+			
+			cxt.rotate((m+s/60)*Math.PI/30);
+			cxt.fillRect(5,0,mlen,3);
+			cxt.restore();
+			cxt.save();
+			
+			cxt.rotate((h+m/60) *Math.PI/6);
+			cxt.fillRect(5,-2,hlen,4);
+		}
+	</script>
+	<head>
+		<meta charset="utf-8">
+		<title>My Clock</title>
+	</head>
+	<body>
+		<fieldset>
+			<legend>绘制时钟</legend>
+			<canvas id="myCanvas" width="400px" height="300px"></canvas>
+			<br />
+			<button onclick="draw()">绘图</button>
+		</fieldset>
+	</body>
+</html>
