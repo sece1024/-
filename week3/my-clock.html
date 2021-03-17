@@ -73,12 +73,12 @@
 			cxt.restore();						// 返回之前保存过的路径状态和属性
 			cxt.save();
 			
-			cxt.rotate(lm*Math.PI/30);
+			cxt.rotate((lm+ls/60)*Math.PI/30);
 			cxt.clearRect(5,-1,mlen+3,5);		// 清除分针
 			cxt.restore();
 			cxt.save();
 			
-			cxt.rotate(lh*Math.PI/6);
+			cxt.rotate((lh+lm/60)*Math.PI/6);
 			cxt.clearRect(5,-3,hlen+3,6);		//清除时针
 			
 
