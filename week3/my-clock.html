@@ -68,7 +68,7 @@
 			cxt.restore();
 			cxt.save();							// 保存当前环境的状态
 			cxt.rotate(ls*Math.PI/30);
-			// context.clearRect(x,y,width,height)：在给定矩形内清空一个矩形，参数是:左上角坐标(x,y)，要清除的像素宽和高
+			//context.clearRect(x,y,width,height)：在给定矩形内清空一个矩形，参数是:左上角坐标(x,y)，要清除的像素宽和高
 			cxt.clearRect(5,-1,slen+3,4);		// 清除上次秒针显示内容
 			cxt.restore();						// 返回之前保存过的路径状态和属性
 			cxt.save();
@@ -81,7 +81,7 @@
 			cxt.rotate(lh*Math.PI/6);
 			cxt.clearRect(5,-3,hlen+3,6);		//清除时针
 			
-			cxt.clearRect()
+
 			var time = new Date();
 			// 获取当前时间
 			var s = ls = time.getSeconds();
