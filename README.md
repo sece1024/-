@@ -1,4 +1,9 @@
+[TOC]
+
+
+
 # 网页动画与三维网页制作
+
 ## 第一周
 *编写一个校园网注册页面*
 
@@ -32,9 +37,112 @@
 
    缺陷：因为有绘制时有偏移，清除的时候也会留下一些痕迹。
    
-   解决办法：清除分针和时针时，给它们的旋转角度也加上一个偏移量：`cxt.rotate((lm+ls/60)*Math.PI/30);`,`cxt.rotate((lh+lm/60)*Math.PI/6);`
+   解决：清除分针和时针时，给它们的旋转角度也加上一个偏移量：`cxt.rotate((lm+ls/60)*Math.PI/30);`,`cxt.rotate((lh+lm/60)*Math.PI/6);`
 
 
+
+## 第四周
+
+`2021/3/21`
+
+### Web SQL
+
+>  提供关系型数据库的基本功能
+
+* 创建或打开数据库
+
+  `openDatabase(daName,dbVersion,dbDescribe,dbSize[,callback()]);`
+
+  1. daName：指定数据库名称
+  2. dbVersion：版本号
+  3. dbDescribe：描述说明
+  4. dbSize：指定大小，单位为字节
+  5. callback：可选参数，指定回调函数
+
+```html
+<!DOCTYPE HTML>
+<meta charset="utf-8" />
+<script>
+	function initDatabase(){
+		if(!window.openDatabase){
+			alert('浏览器不支持Web SQL数据库。');
+		}else{
+			var dbName = 'myDB';
+			var dbVersion = '1.0';
+			var dbDec = 'Demo Database';
+			var dbSize = 100000;
+			// 创建数据库，并调用showResult方法
+			DB = openDatabase(dbName,dbVersion,dbDec,dbSize,showResult());					
+		}
+	}
+	function showResult(){
+		var result = document.getElementById("result");
+		result.innerHTML = '数据库创建成功！';
+	}
+</script>
+<fieldset>
+	<legend>openDatabase的应用</legend>
+	<span id="result"></span>
+	<button onclick="initDatabase()">打开/创建</button>
+</fieldset>
+<!-- <html>
+	<h1>Hello!</h1>
+</html> -->
+```
+
+### 增删改查
+
+> JavaScript调用executeSql()方法来执行相应的SQL语句。
+
+
+
+> 事务：作为单个逻辑工作单元执行的一系列操作，满足ACID。
+
+* ACID
+  * 原子性
+  * 一致性
+  * 隔离性
+  * 持久性
+
+**开启事务的语法格式：**
+
+```javascript
+db.transaction(function(tx)){
+               tx.executeSql('sql')
+               }
+```
+
+或者：
+
+```javascript
+tx.executeSql('sql语句',
+             [params],
+             function(tx,rs){},
+             function(tx,error));
+
+```
+
+
+
+
+
+#### 执行流程
+
+1. 打开数据库
+2. 开启一个事务
+3. 执行相应的SQL语句
+
+
+
+#### 建表
+
+`tx.executeSql('create table [if not exits] tablename (column1,column2,...)')`
+
+
+
+#### 插入数据
+
+`tx.executeSql('insert into create tablename(column1,column2,column3) value(?,?,?)',[param1,param2,param3]);`
 
 
 

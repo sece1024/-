@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<meta charset="utf-8" />
+<script>
+	function initDatabase(){
+		if(!window.openDatabase){
+			alert('浏览器不支持Web SQL数据库。');
+		}else{
+			var dbName = 'myDB';
+			var dbVersion = '1.0';
+			var dbDec = 'Demo Database';
+			var dbSize = 100000;
+			// 创建数据库，并调用showResult方法
+			DB = openDatabase(dbName,dbVersion,dbDec,dbSize,showResult());					
+		}
+	}
+	function showResult(){
+		var result = document.getElementById("result");
+		result.innerHTML = '数据库创建成功！';
+	}
+</script>
+<fieldset>
+	<legend>openDatabase的应用</legend>
+	<span id="result"></span>
+	<button onclick="initDatabase()">打开/创建</button>
+</fieldset>
+<!-- <html>
+	<h1>Hello!</h1>
+</html> -->
