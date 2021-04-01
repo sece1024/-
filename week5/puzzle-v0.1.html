@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<!--
+name: puzzle
+version: 0.1
+author: HGX
+describe: 只实现九宫格
+-->
+<meta charset="utf-8"/>
+	<head>
+		<title>Jigsaw puzzle</title>
+		<style type="text/css">
+			/* 使用通配符去掉所有元素默认样式*/
+			*{
+				padding: 0;
+				margin: 0;
+				border: 0;
+			}
+			body{
+				width: 100%;
+				height: 100%;
+			}
+			/* 设置外围容器属性*/
+			#container{
+				
+				position: relative;
+				width: 640px;
+				height: 480px;
+				margin: 0 auto;
+				margin-top: 100px; <!--距离顶部长度-->
+				border-radius: 10px;
+			}
+			/*装九宫格的棋盘*/
+			#board{
+				position: absolute; <!--绝对位置-->
+				width:450px;
+				height: 450px
+				border-radius:5px;
+				display: inline-block;
+				background-color: antiquewhite;
+				box-shadow: 0 0 10px black;
+				
+			}
+			/*小方格*/
+			#board div{
+				position: absolute;
+				width: 149px;
+				height: 149px;
+				box-shadow: 1px 1px 2px aquamarine;
+				background-color: blanchedalmond;
+				color: aliceblue;
+				text-align: center; <!--文字居中-->
+				font-size: 150px;
+				line-height: 150px;
+				cursor: pointer;
+				transition: 0.3s;
+			}
+			#board div:hover{
+				color: coral;
+			}
+			
+			/*小格子*/
+			#cell1{
+				display: inline;
+				left: 0px;
+			}
+			#cell2{
+				display: inline;
+				left: 150px;
+			}
+			#cell3{
+				display: inline;
+				left: 300px;
+			}
+			#cell4{
+				top: 150px;
+				left: 0px;
+			}
+			#cell5{
+				top: 150px;
+				left:150px;
+			}
+			#cell6{
+				top: 150;
+				left: 300px;
+			}
+			#cell7{
+				top: 300px;
+				left: 0px;
+			}
+			#cell8{
+				top: 300px;
+				left: 150px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<!--九宫格-->
+			<div id="board">	
+				<div id="cell1" onclick="clickTest(1)">1</div>
+				<div id="cell2" onclick="clickTest(2)">2</div>
+				<div id="cell3" onclick="clickTest(3)">3</div>
+				<div id="cell4" onclick="clickTest(4)">4</div>
+				<div id="cell5" onclick="clickTest(5)">5</div>
+				<div id="cell6" onclick="clickTest(6)">6</div>
+				<div id="cell7" onclick="clickTest(7)">7</div>
+				<div id="cell8" onclick="clickTest(8)">8</div>
+				
+			</div>			
+		</div>
+
+	</body>
+	
+	<script>
+		alert("点击方块进行测试");
+		function clickTest(n){
+			alert(n);
+		} 
+	</script>
+</html>
+
