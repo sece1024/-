@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<!--
+name: puzzle
+version: 0.1
+author: HGX
+describe: 只实现九宫格
+-->
+<meta charset="utf-8"/>
+	<head>
+		<title>Jigsaw puzzle</title>
+		<style type="text/css">
+			/* 使用通配符去掉所有元素默认样式*/
+			*{
+				padding: 0;
+				margin: 0;
+				border: 0;
+			}
+			body{
+				width: 100%;
+				height: 100%;
+			}
+			/* 设置外围容器属性*/
+			#container{
+				
+				position: relative;
+				width: 640px;
+				height: 480px;
+				margin: 0 auto;
+				margin-top: 100px; <!--距离顶部长度-->
+				border-radius: 10px;
+			}
+			/*装九宫格的棋盘*/
+			#board{
+				position: absolute; <!--绝对位置-->
+				width:450px;
+				height: 450px
+				border-radius:5px;
+				display: inline-block;
+				background-color: antiquewhite;
+				box-shadow: 0 0 10px black;
+				
+			}
+			/*小方格*/
+			#board div{
+				position: absolute;
+				width: 149px;
+				height: 149px;
+				box-shadow: 1px 1px 2px aquamarine;
+				background-color: blanchedalmond;
+				color: teal;
+				text-align: center; <!--文字居中-->
+				font-size: 130px;
+				line-height: 150px;
+				cursor: pointer;
+				transition: 0.3s;
+			}
+			#board div:hover{
+				color: coral;
+				font-size: 150px; <!--字体放大效果-->
+			}
+			
+			/*小格子*/
+			#cell1{
+				display: inline;
+				left: 0px;
+			}
+			#cell2{
+				display: inline;
+				left: 150px;
+			}
+			#cell3{
+				display: inline;
+				left: 300px;
+			}
+			#cell4{
+				display: inline;
+				top: 150px;
+				left: 0px;
+			}
+			#cell5{
+				display: inline;
+				top: 150px;
+				left:150px;
+			}
+			#cell6{
+				display: inline;
+				top: 150px;
+				left: 300px;
+			}
+			#cell7{
+				display: inline;
+				top: 300px;
+				left: 0px;
+			}
+			#cell8{
+				display: inline;
+				top: 300px;
+				left: 150px;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<!--九宫格-->
+			<div id="board">	
+				<div id="cell1" onclick="dataMove(1)">1</div>
+				<div id="cell2" onclick="dataMove(2)">2</div>
+				<div id="cell3" onclick="dataMove(3)">3</div>
+				<div id="cell4" onclick="dataMove(4)">4</div>
+				<div id="cell5" onclick="dataMove(5)">5</div>
+				<div id="cell6" onclick="dataMove(6)">6</div>
+				<div id="cell7" onclick="dataMove(7)">7</div>
+				<div id="cell8" onclick="dataMove(8)">8</div>
+				
+			</div>			
+		</div>
+
+	</body>
+	
+	<script>
+		var array_board = [[1,2,3],[4,5,6],[7,8,0]]; // 棋盘
+		// goal = array_board.toString();
+		console.log(typeof(goal)+":"+getBoard());
+		alert("点击方块进行测试");
+		function clickTest(n){
+			alert(n);
+		} 
+		
+		// 测试改变棋盘
+		function testChange(){
+			array_board[0][0] = 9;
+			alert(getBoard());
+		}
+		
+		// 获取当前棋盘(字符串)
+		function getBoard(){
+			return array_board.toString();
+		}
+		// 获取当前棋盘，并在每一行元素末尾添加 '\n'
+		function showBoard(){
+			var out = '\n';
+			for(var i=0;i<3;i++){
+				for(var j=0;j<3;j++){
+					if(j != 2){out += array_board[i][j]+' ';}
+					else{out += array_board[i][j]+'\n';}
+					
+				}
+			}
+			return out;
+		}
+		// 获取坐标
+		function getIndex(n){
+			x = parseInt(n);
+			if(x>0 && x <9){
+				for(var i=0;i<3;i++){
+					for(var j=0;j<3;j++){
+						if(array_board[i][j] == x){
+							return [i,j]
+						}
+					}
+				}
+			}
+			
+		}
+
+		// 若点击的方块在0周围，则与0交换位置，否则不变
+		function dataMove(n){			
+			x = parseInt(n);
+			
+			//一维坐标转换为二维坐标
+			// var i = parseInt((x-1)/3);	// 要先转换成整型，否则它为浮点数
+			// var j = parseInt((x-1)%3);
+			var index = getIndex(x);
+			console.log("now index = "+index);
+			zero = findZero(index[0],index[1]);	// 如果0在周围则返回0的坐标
+			console.log("zero = "+zero);
+			// alert("typeof(zero) = "+typeof zero);
+			
+			if (zero[0] < 0){
+				alert("无法移动!");
+			}else{
+				console.log(typeof zero[0]);
+				array_board[zero[0]][zero[1]] = n;
+				array_board[index[0]][index[1]] = 0;
+			}
+			
+			console.log("array_board = "+showBoard());
+		}
+		// 在坐标i，j的上下左右寻找是否有0，有返回0的坐标，否则返回null
+		function findZero(a,b){	
+			i = parseInt(a);
+			j = parseInt(b);
+			
+			// 如果空格在中央
+			if(array_board[1][1] == 0){
+				// 并且被点击的方块在中间行或者中间列，则表示它们相邻
+				if(i == 1 || j == 1){
+					return [1, 1];	// 如果不相邻，则表示无法移动，后面的便不需要判断了
+				}
+			}
+			// 如果方块在中央
+			else if(i == 1 && j == 1){
+				var wsad = [[i-1,j],[i+1,j],[i,j-1],[i,j+1]];	//上下左右四个方向
+				for(var ij in wsad){	// for ij in array 语句中ij表示的是数组下标
+					if(array_board[wsad[ij][0]][wsad[ij][1]] == 0){
+						return [wsad[ij][0],wsad[ij][1]];
+					}
+				}
+			}
+			// 方块在中间一行
+			else if(i == 1){
+				var arr = [i-1,i+1]; //中央位置不需要遍历
+				for(var ii in arr){	
+					console.log("[ii,j]="+[arr[ii],j]+"\narray_board[ii][j] = "+array_board[arr[ii]][j]);
+					if(array_board[arr[ii]][j] == 0){return [arr[ii],j];}
+				}
+			}
+			// 方块在中间一列
+			else if(j == 1){
+				var arr = [j-1, j+1]
+				for(var jj in [j-1, j+1]){	//中央位置不需要遍历
+					if(array_board[i][arr[jj]] == 0){return [i,arr[jj]];}
+				}
+			}
+			// 方块在四个角落
+			else if(i == 0 && j == 0){
+				if(array_board[i][j+1] == 0){return [i,j+1];}
+				if(array_board[i+1][j] == 0){return [i+1,j];}
+			}
+			else if(i == 0 && j == 2){
+				if(array_board[i][j-1] == 0){return [i,j-1];}
+				if(array_board[i+1][j] == 0){return [i+1,j];}
+			}
+			else if(i == 2 && j == 2){
+				if(array_board[i][j-1] == 0){return [i,j-1];}
+				if(array_board[i-1][j] == 0){return [i-1,j];}
+			}
+			else if(i == 2 && j == 0){
+				if(array_board[i][j+1] == 0){return [i,j+1];}
+				if(array_board[i-1][j] == 0){return [i-1,j];}
+			}
+		// 	if(i == 0 || i == 2){	//点击的方格在第一行或第三行
+				
+		// 		// 先遍历中间一行
+		// 		for(var jj=0;jj<3;jj++){
+		// 			if(array_board[1][jj] == 0){
+		// 				return [i,jj];
+		// 			}
+		// 		}
+				
+		// 		// 再遍历中间一列
+		// 		for(ii = 0;ii<3;ii++){
+		// 			if(ii == 1){continue;}	// 中间行上的不需要遍历
+		// 			if(array_board[ii][1] == 0){
+		// 				return [i,ii];
+		// 			}
+		// 		}
+		// 		// 如果在中间列，就需要判断中央位置的元素是否为0
+		// 		if(j == 1){
+					
+		// 		}
+		// 	}
+		// 	else{	// 第一列，第三列或者中间
+		// 		if(j == 0){					
+		// 			if(array_board[i][j+1] == 0){
+		// 				return [i,j+1];
+		// 			}
+		// 			else if(array_board[i - 1][j] == 0){
+		// 				return [i - 1][j];
+		// 			}
+		// 			else if(array_board[i + 1][j] == 0){
+		// 				return [i + 1][j];
+		// 			}
+		// 	}
+		// 	else if(j == 2){
+		// 		// console.log("array_board[i][j] = "+array_board[i][j]);
+		// 		if(array_board[i][j-1] == 0){					
+		// 				return [i,j-1];
+		// 			}									
+		// 		else if(array_board[i - 1][j] == 0){
+		// 			return [i - 1][j];
+		// 		}
+		// 		else if(array_board[i + 1][j] == 0){
+		// 			return [i + 1][j];
+		// 		}
+		// 	}
+		// 	else{
+		// 		var wsad = [[i-1,j],[i+1,j],[i,j-1],[i,j+1]];	//上下左右四个方向
+		// 		for(var ij in wsad){
+		// 			if(array_board[ij[0]][ij[1]] == 0){
+		// 				return [ij[0],ij[1]];
+		// 			}
+		// 		}
+		// 	}
+			
+		// }
+		return [-1,-1];
+	}
+	</script>
+</html>
