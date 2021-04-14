@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="background-index.css">
+    <link rel="stylesheet" href="puzzle03.css">
+
+    <style>
+        section {
+            margin: 0;
+            padding: 1%;
+            background: black;
+        }
+
+        header {
+            margin: 0;
+
+
+        }
+
+        footer {
+            background: green;
+        }
+
+        nav {
+            margin: 0;
+            padding: 5px;
+
+            list-style: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <Header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="puzzle-v0.2.html">Puzzle</a></li>
+                <li><a class="active" href="test.html">Test</a></li>
+            </ul>
+
+        </nav>
+    </Header>
+    <h1>Test</h1>
+    <div>info</div>
+    <div id="container">
+        <!--九宫格-->
+        <div id="board">
+            <div id="cell1" onclick="dataMove(1)">1</div>
+            <div id="cell2" onclick="dataMove(2)">2</div>
+            <div id="cell3" onclick="dataMove(3)">3</div>
+            <div id="cell4" onclick="dataMove(4)">4</div>
+            <div id="cell5" onclick="dataMove(5)">5</div>
+            <div id="cell6" onclick="dataMove(6)">6</div>
+            <div id="cell7" onclick="dataMove(7)">7</div>
+            <div id="cell8" onclick="dataMove(8)">8</div>
+
+        </div>
+    </div>
+
+    <footer>Footer</footer>
+    <script src="puzzleMove01.js"></script> <!-- 方格移动 -->
+</body>
+
+</html>
