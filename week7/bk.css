@@ -2,39 +2,43 @@
     padding: 0;
     margin:0;
 } */
+
 @media screen and (max-width: 400px) {
-    .features{
+    .features {
         background: red;
     }
 }
+
 body {
     background: gray;
 }
-div.cellHover:hover{
+
+div.cellHover:hover {
     background: whitesmoke;
     color: black;
     position: relative;
 }
-div.cellBoard{
+
+div.cellBoard {
     /* position: absolute; */
     margin: 0%;
-    background:rgb(216, 124, 38);
+    background: rgb(216, 124, 38);
     width: 50%;
     height: 50%;
     position: relative;
     display: block;
 }
-div.cellRow{
+
+div.cellRow {
     /* position: absolute; */
     display: block;
     padding: 1px;
-
 }
-div.cellCol{
+
+div.cellCol {
     /* position: absolute; */
     padding: 1px;
     margin: 1%;
-    
     background: goldenrod;
     display: inline-block;
     width: 59px;
@@ -42,20 +46,34 @@ div.cellCol{
     font-size: 25px;
     color: antiquewhite;
     text-align: center;
-    
 }
 
-header{
+#cellNotShow {
+    /* position: absolute; */
+    padding: 1px;
+    margin: 1%;
+    background: goldenrod;
+    display: inline-block;
+    width: 59px;
+    height: 59px;
+    font-size: 25px;
+    color: antiquewhite;
+    text-align: center;
+    display: none;
+}
+
+header {
     padding: 0px;
     margin: 0px;
 }
-ul{
 
+ul {
     padding: 10px;
-    margin:10px;
+    margin: 10px;
     background: rgb(159, 123, 224);
 }
-li{
+
+li {
     margin: 0px;
     padding: 0px;
     background: rgb(172, 113, 5);
@@ -63,10 +81,11 @@ li{
     display: inline-block;
 }
 
-a{
+a {
     text-decoration: none;
 }
-a:hover{
+
+a:hover {
     background: red;
     text-decoration: underline;
 }
