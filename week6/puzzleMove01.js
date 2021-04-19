@@ -48,21 +48,25 @@ function getIndex(n) {
 
 // 若点击的方块在0周围，则与0交换位置，否则不变
 function dataMove(n) {
+    console.log("你想要移动: " + n);
     x = parseInt(n);
 
     //一维坐标转换为二维坐标
     // var i = parseInt((x-1)/3);	// 要先转换成整型，否则它为浮点数
     // var j = parseInt((x-1)%3);
     var index = getIndex(x);
-    console.log("now index = " + index);
+    // console.log("now index = " + index);
     zero = findZero(index[0], index[1]);	// 如果0在周围则返回0的坐标
-    console.log("zero = " + zero);
+    // console.log("zero = " + zero);
     // alert("typeof(zero) = "+typeof zero);
 
     if (zero[0] < 0) {
         alert("无法移动!");
+        console.log(n + "无法移动！");
     } else {
-        console.log(typeof zero[0]);
+        alert(n + "已移动到 (" + zero[0] + "，" + zero[1] + ") 位置，打开控制台查看。");
+        console.log(n + "已移动到 (" + zero[0] + "，" + zero[1] + ") 位置");
+        // console.log(typeof zero[0]);
         array_board[zero[0]][zero[1]] = n;
         array_board[index[0]][index[1]] = 0;
     }
@@ -94,7 +98,7 @@ function findZero(a, b) {
     else if (i == 1) {
         var arr = [i - 1, i + 1]; //中央位置不需要遍历
         for (var ii in arr) {
-            console.log("[ii,j]=" + [arr[ii], j] + "\narray_board[ii][j] = " + array_board[arr[ii]][j]);
+            // console.log("[ii,j]=" + [arr[ii], j] + "\narray_board[ii][j] = " + array_board[arr[ii]][j]);
             if (array_board[arr[ii]][j] == 0) { return [arr[ii], j]; }
         }
     }
