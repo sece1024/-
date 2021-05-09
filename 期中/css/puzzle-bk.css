@@ -1,0 +1,57 @@
+* {/* 使用通配符去掉所有元素默认样式*/
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+body {
+    background: grey;
+    color: white;
+    font: Helveticaelvel, Arial, sans-serif;
+}
+header{
+    background: rgb(149, 151, 114);
+    padding: 10px;
+}
+footer{
+    position:relative;
+    text-align: center;
+    margin-bottom: 100%;
+    
+}
+h1{
+    color:rgb(100, 200, 100);
+}
+a{
+    text-decoration: none;  /* 删除链接下划线 */
+}
+nav{
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-type: none;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+li {
+    float: left;
+}
+li a{
+    display: inline-block;
+    text-align: center;
+    padding:10px 15px;
+    font-size: 120%;
+    text-decoration: none;
+}
+.active{
+    background: red;
+}
+li:hover{
+    background-color: #ddd;
+    color: black;
+    text-decoration: underline;
+}

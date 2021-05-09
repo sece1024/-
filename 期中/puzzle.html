@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="css/puzzle-bk.css">
+    <link rel="stylesheet" href="css/puzzle-cell.css">
+
+    <style>
+        section {
+            margin: 0;
+            padding: 1%;
+            background: black;
+        }
+
+        header {
+            margin: 0;
+
+
+        }
+
+        footer {
+            background: green;
+        }
+
+        nav {
+            margin: 0;
+            padding: 5px;
+
+            list-style: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <Header style="display: flex;">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <!-- <li><a href="puzzle-v0.2.html">Puzzle</a></li>
+                <li><a class="active" href="test.html">Test</a></li> -->
+            </ul>
+
+        </nav>
+    </Header>
+    <div id="container">
+        <!--九宫格-->
+        <div id="board">
+            <div id="cell1" name="cell" onclick="move(0)"> </div>
+            <div id="cell2" name="cell" onclick="move(1)"></div>
+            <div id="cell3" name="cell" onclick=" move(2)"></div>
+            <div id="cell4" name="cell" onclick=" move(3)"></div>
+            <div id="cell5" name="cell" onclick=" move(4)"></div>
+            <div id="cell6" name="cell" onclick=" move(5)"></div>
+            <div id="cell7" name="cell" onclick=" move(6)"></div>
+            <div id="cell8" name="cell" onclick=" move(7)"></div>
+            <div id="cell9" name="cell" onclick=" move(8)"></div>
+
+        </div>
+        <!--按钮-->
+        <div class="div-btn">
+            <button class="btn" onclick="initCells()">Init</button>
+            <br>
+            <button class="btn" onclick="test()">Test</button>
+            <br>
+            <button class="btn" onclick="printBoard()">print</button>
+        </div>
+        <!--计数器-->
+        <div class="counter">
+            当前移动次数:<p id="countNum" style="display: inline;"> 0</p>
+        </div>
+
+    </div>
+
+
+    <footer>H G X</footer>
+    <!-- 方格移动 -->
+    <!-- <script src="js/puzzleMove01.js"></script> -->
+    <script src="js/puzzleMove.js"></script>
+</body>
+
+</html>
