@@ -4,6 +4,7 @@ let GAOL = '0,1,2,3,4,5,6,7,8'; // 目标状态
 var cells = document.getElementsByName("cell"); // 网格对象
 var board = []; // 棋盘
 var board2 = [[], [], []];//二维棋盘
+var isAI = false;//电脑操作时，不显示获胜窗口
 for (var i = 0; i < _size; i++) {// 棋盘初始化
     for (var j = 0; j < _size; j++) {
         board[i * _size + j] = i * _size + j;
@@ -37,6 +38,7 @@ function initCells() {
         board[i] = i;
     }
     counterClear();
+    setBoard();
 
 
 
@@ -49,6 +51,15 @@ function setBoard() {
         // console.log(cells[i].innerHTML);
         // if (array[i] != 0)
         cells[i].innerHTML = board[i];
+    }
+
+    // 将0隐藏
+    for(i in cells){
+        if(cells[i].innerHTML == 0){
+            cells[i].style="color:blanchedalmond";
+        }else{
+            cells[i].style = "color:teal;"
+        }
     }
 
 
@@ -118,7 +129,12 @@ function move(n) {
             counterAdd();
             setBoard();    // 刷新棋盘
             // 是否复原
-            if (checkWin()) alert("You Win!");
+            if (checkWin()){
+                if(!isAI){
+                    waitNAndWin(500);
+                    // alert("You Win!");
+                }
+            } 
         }
     }
 
@@ -154,11 +170,24 @@ function sleep(time) {
 
 // 打乱棋盘-移动n次
 async function moveNTimes(n) {
+    // 计数器清零
+    counterClear();
+
     var i = 0;
+    // 电脑操控，不显示获胜弹窗
+    isAI = true;
+    // 随机移动n次
     for (; i < n; i++) {
         randomMove();
-        await sleep(300);/*async await实际上是generator和promise的语法糖，在提供同步编程方式实现异步调用的基础上，同时满足对sleep函数语义化的支持，也是常用的sleep的实现方式。 */
+        await sleep(100);/*async await实际上是generator和promise的语法糖，在提供同步编程方式实现异步调用的基础上，同时满足对sleep函数语义化的支持，也是常用的sleep的实现方式。 */
     }
+    isAI = false;
+}
+// 停留n毫秒后,显示获胜弹窗
+async function waitNAndWin(n){
+    x = parseInt(n);
+    await sleep(x);
+    alert("You Win!");
 }
 // 随机移动
 // 随机点击0周围的数字
@@ -174,6 +203,7 @@ function randomMove() {
     // console.log("parseInt r: " + parseInt(r * dirNum))
     // console.log("random dir: " + dir[parseInt(r * dirNum)])
 
+    
     move(dir[parseInt(r * dirNum)]);
 
 

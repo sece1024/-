@@ -1,10 +1,9 @@
 div.login{
-    display: block;
     position: relative;
-    /* padding: 100px; */
     margin-left: 40%;
     margin-right: 40%;
     margin-top: 20%;
+
 }
 
 div.logup{
@@ -37,4 +36,11 @@ footer{
     left:0px;
     /* flex: 0 0 auto;s */
     background-color: green;
+}
+ #username{
+    /* background-color: red; */
+    position: relative;
+    display: inline-block;
+    top:auto;
+    
 }

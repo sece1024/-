@@ -24,6 +24,31 @@
             color: whitesmoke;
         }
     </style>
+    <!-- <script>
+        function initDatabase(){
+            if(!window.openDatabase){
+                alert('浏览器不支持Web SQL数据库。');
+            }else{
+                var dbName = 'myAccount';
+                var dbVersion = '1.0';
+                var dbDec = 'Account Database';
+                var dbSize = 100;
+                // 创建数据库，并调用showResult方法
+                DB = openDatabase(dbName,dbVersion,dbDec,dbSize,showResult());					
+            }
+        }
+        function showResult(){
+            console.log("数据库创建成功！");        
+        }
+        // 建表
+        function createTableTest(){
+            DB.transaction(function(tx)){
+            tx.executeSql('create table [if not exits] userName');
+        }
+        }
+        
+        initDatabase();
+    </script> -->
 </head>
 
 <body>
@@ -33,6 +58,7 @@
                 <li>
                     <a href="index.html">Home</a>
                 </li>
+                <!-- <li><a href="test.html">Test</a></li> -->
             </ul>
         </nav>
 
@@ -45,12 +71,12 @@
                 <p>密码:<br><input id="password" type="password" name="username"></p>
                 <!-- <br> -->
                 <!-- <input type="submit" value="登陆" onclick="login()"> -->
-                <input type="submit" value="注册" onclick="logup()">
+                <input type="submit" value="注册" onclick="saveAccount()">
             </tr>
         </div>
     </section>
     <footer>H G X</footer>
-
+    <script src="js/infoStorage.js"></script>
 </body>
 
 </html>
