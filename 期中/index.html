@@ -33,20 +33,20 @@
     <div class="login">
         <tr>
             <!-- 图标 -->
-            
-            <i id="icon-user" class="glyphicon glyphicon-user" style="color: rgb(71, 57, 31); font-size: 25px;">用户名</i> 
+
+            <i id="icon-user" class="glyphicon glyphicon-user" style="color: rgb(71, 57, 31); font-size: 25px;">用户名</i>
             <br>
             <input id="username" type="text" name="username" value="none">
-           <br>
-            
+            <br>
+
             <i class="glyphicon glyphicon-lock" style="color: rgb(71, 57, 31); font-size: 25px;">密码</i>
-           <br>
+            <br>
             <input id="password" type="password" name="username" value="123">
             <br>
             <input type="submit" value="登陆" onclick="login()">
             <input type="submit" value="注册" onclick="logup()">
         </tr>
-
+        <!-- <footer>H G X</footer> -->
     </div>
 
 
@@ -54,7 +54,7 @@
         // var account = { 'none': '123', 'root': '123' };
         var username = document.getElementById("username");
         var psw = document.getElementById("password");
-        function login() {            
+        function login() {
             let m_name = username.value;
             let m_psw = psw.value;
 
@@ -64,10 +64,10 @@
             //     window.location.href = "puzzle.html";    //跳转到新页面
 
             // } 
-            if(localStorage.getItem(m_name) == m_psw){
+            if (localStorage.getItem(m_name) == m_psw) {
                 console.log("登陆成功!");
                 window.location.href = "puzzle.html";    //跳转到新页面
-                
+
             }
             else {
                 alert("用户名或密码错误!");

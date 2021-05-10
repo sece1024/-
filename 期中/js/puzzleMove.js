@@ -1,6 +1,6 @@
 let _size = 3; // 二维棋盘大小
 let size = _size * _size;   // 一维棋盘大小
-let GAOL = '0,1,2,3,4,5,6,7,8'; // 目标状态
+let GAOL = '1,2,3,4,5,6,7,8,0'; // 目标状态
 var cells = document.getElementsByName("cell"); // 网格对象
 var board = []; // 棋盘
 var board2 = [[], [], []];//二维棋盘
@@ -34,8 +34,8 @@ function initCells() {
         // let ii = i + 1;
         // board[i] = ii;
         // if (ii < size)
-        cells[i].innerHTML = i;
-        board[i] = i;
+        cells[i].innerHTML = (i + 1) % 9;
+        board[i] = (i + 1) % 9;
     }
     counterClear();
     setBoard();
@@ -46,7 +46,7 @@ function initCells() {
 // 按照一维数组board修改棋盘
 function setBoard() {
     // console.log(array.length);
-
+    // 按照棋盘一维数组重新对<div>元素写入数字
     for (var i = 0; i < size; i++) {
         // console.log(cells[i].innerHTML);
         // if (array[i] != 0)
@@ -54,10 +54,10 @@ function setBoard() {
     }
 
     // 将0隐藏
-    for(i in cells){
-        if(cells[i].innerHTML == 0){
-            cells[i].style="color:blanchedalmond";
-        }else{
+    for (i in cells) {
+        if (cells[i].innerHTML == 0) {
+            cells[i].style = "color:blanchedalmond";
+        } else {
             cells[i].style = "color:teal;"
         }
     }
@@ -82,6 +82,7 @@ function getBoard2() {
 }
 
 // 获取0周围的合法下标
+// 只有0周围的数字才能移动，知道0周围有哪些数字后，检查鼠标点击的数字是否在这些数字之中即可判断是否能移动；
 function getMoves() {
     b = getBoard2();
     // console.log('b: ' + b);
@@ -129,12 +130,12 @@ function move(n) {
             counterAdd();
             setBoard();    // 刷新棋盘
             // 是否复原
-            if (checkWin()){
-                if(!isAI){
+            if (checkWin()) {
+                if (!isAI) {
                     waitNAndWin(500);
                     // alert("You Win!");
                 }
-            } 
+            }
         }
     }
 
@@ -184,7 +185,7 @@ async function moveNTimes(n) {
     isAI = false;
 }
 // 停留n毫秒后,显示获胜弹窗
-async function waitNAndWin(n){
+async function waitNAndWin(n) {
     x = parseInt(n);
     await sleep(x);
     alert("You Win!");
@@ -203,7 +204,7 @@ function randomMove() {
     // console.log("parseInt r: " + parseInt(r * dirNum))
     // console.log("random dir: " + dir[parseInt(r * dirNum)])
 
-    
+
     move(dir[parseInt(r * dirNum)]);
 
 
