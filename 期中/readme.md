@@ -38,7 +38,7 @@
 
 ### 注册界面
 
-[]: .\Web-animation-and-3D-webpage-production\期中\logup.html	"注册界面"
+["注册界面"](.\Web-animation-and-3D-webpage-production\期中\logup.html)
 
 **描述：**
 

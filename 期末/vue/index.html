@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Welcome to Vue</title>
+
+</head>
+
+<body>
+    <div id="app1">
+        <img src="https://vuejs.org/images/logo.png" alt="Vue logo">
+        <h1>{{ greeting }}</h1>
+        <!-- <ul>
+      <li>
+        To learn more about Vue, visit
+        <a :href="docsURL" target="_blank">
+          {{ humanizeURL(docsURL) }}
+        </a>
+      </li>
+      <li>
+        For live help with simple questions, check out
+        <a :href="discordURL" target="_blank">
+          the Discord chat
+        </a>
+      </li>
+      <li>
+        For more complex questions, post to
+        <a :href="forumURL" target="_blank">
+          the forum
+        </a>
+      </li>
+    </ul> -->
+        <!-- <router-view></router-view> -->
+        <router-view></router-view>
+    </div>
+
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-router.js"></script>
+    <script>
+        // import Vue from 'vue'
+        // import VueRouter from 'vue-router'
+
+        // const routes = [{
+        //     name: 'hello',
+        //     Comment: () =>
+        //         import ('./components/Hello')
+        // }];
+
+        // 1. 定义 (路由) 组件。
+        // 可以从其他文件 import 进来
+        const Foo = {
+            template: '<div>foo</div>'
+        }
+        const Bar = {
+            template: '<div>bar</div>'
+        }
+
+        // 每个路由应该映射一个组件。 其中"component" 可以是
+        // 通过 Vue.extend() 创建的组件构造器，
+        // 或者，只是一个组件配置对象。
+        // 我们晚点再讨论嵌套路由。
+        const routes = [{
+            path: '/foo',
+            component: Foo
+        }, {
+            path: '/bar',
+            component: Bar
+        }]
+
+        const router = new VueRouter({
+            routes // (缩写) 相当于 routes: routes
+        })
+        var app1 = new Vue({
+            el: '#app1',
+            data: {
+                greeting: 'Welcome to your Vue.js app!',
+                docsURL: 'http://vuejs.org/guide/',
+                discordURL: 'https://chat.vuejs.org',
+                forumURL: 'http://forum.vuejs.org/'
+            },
+            methods: {
+                humanizeURL: function(url) {
+                    return url
+                        .replace(/^https?:\/\//, '')
+                        .replace(/\/$/, '')
+                }
+            },
+            router
+            // ,
+            // router
+        }).$mount('#app1')
+    </script>
+</body>
+
+</html>
